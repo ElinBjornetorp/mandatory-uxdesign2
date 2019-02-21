@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Quiz master</title>
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script type="text/javascript" src="myscript.js" defer></script>
+  </head>
+  <body>
+    <header class="mdc-top-app-bar">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <span class="mdc-top-app-bar__title">Quiz master</span>
+        </section>
+      </div>
+    </header>
+    <main>
+    </main>
+
+    <!-- Dialog -->
+    <div class="mdc-dialog"
+         role="alertdialog"
+         aria-modal="true"
+         aria-labelledby="my-dialog-title"
+         aria-describedby="my-dialog-content">
+      <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+          <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
+          <!-- <h2 class="mdc-dialog__title" id="my-dialog-title">Dialog title</h2> -->
+          <div class="mdc-dialog__content" id="my-dialog-content">
+            <p id="dialog__result-message">Dialog body text goes here.</p>
+            <p>Play again?</p>
+          </div>
+          <footer class="mdc-dialog__actions">
+            <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="go-to-start-page">
+              <span class="mdc-button__label">No</span>
+            </button>
+            <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="new-quiz">
+              <span class="mdc-button__label">Yes</span>
+            </button>
+          </footer>
+        </div>
+      </div>
+      <div class="mdc-dialog__scrim"></div>
+    </div>
+
+  </body>
+</html>
