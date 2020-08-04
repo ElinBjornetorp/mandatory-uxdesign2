@@ -39,6 +39,12 @@ function parseJSON(jsonString) {
   }
 }
 
+function decodeHTML(html) {
+  var txt = document.createElement('textarea');
+	txt.innerHTML = html;
+	return txt.value;
+}
+
 // -------------------- Function shuffling array ---------------------------
 function shuffle(array) {
 
@@ -110,7 +116,7 @@ function checkAnswers() {
   //Checking how many answers that were correct
   for(let i = 0; i < questionObjects.length; i++) {
     let questionObject = questionObjects[i];
-    console.log(questionObject);
+    //console.log('questionObject: ', questionObject);
     let correct = questionObject.answerIsCorrect();
     if (correct) {
       countCorrectAnswers++;
@@ -312,7 +318,7 @@ function renderQuizPage() {
           let label = document.createElement('label');
           label.setAttribute('for', inputId);
           label.innerHTML = answer;
-          label.style.color = 'black';
+          //label.style.color = 'black';
           formField.appendChild(label);
 
           let lineBreak = document.createElement('br');
@@ -366,6 +372,23 @@ function removeErrorMessage() {
   form.removeChild(errorMessage);
 }
 
+function showCorrectAnswers() {
+  for(let i = 0; i < 10; i++) {
+    //Creating variables
+    let questionObject = questionObjects[i];
+    let querySelector = '#question' + questionObject.id + ' label';
+    let arrayOfLabels = document.querySelectorAll(querySelector);
+    let correctAnswer = decodeHTML(questionObject.correctAnswer); // Decode to avoid things like &quote in string
+    for(let label of arrayOfLabels) {
+      console.log(label.textContent);
+      if(label.textContent === correctAnswer) {
+        label.classList.add('correct');
+        break;
+      }
+    }
+  }
+}
+
 // -------------------------- CONTROLLER ------------------------------------------
 
 //Setting quiz nr to 1
@@ -416,13 +439,15 @@ function onSubmitCheckAnswers(event) {
   //Counting correct answers
   let countCorrectAnswers = checkAnswers();
 
+  showCorrectAnswers();
+
   //Updating text in dialog
-  let messageInDialog = document.querySelector('#dialog__result-message');
-  messageInDialog.textContent = 'You answered ' + countCorrectAnswers + ' of 10 questions correctly.';
+  //let messageInDialog = document.querySelector('#dialog__result-message');
+  //messageInDialog.textContent = 'You answered ' + countCorrectAnswers + ' of 10 questions correctly.';
 
   //Showing dialog
-  dialog.open();
+  //dialog.open();
 
   //Making it impossible to interact with any element in the form
-  disableFormElements();
+  //disableFormElements();
 }

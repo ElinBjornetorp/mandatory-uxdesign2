@@ -49,6 +49,22 @@ form {
   border-color: #FFAB00;
 }
 
+/* label {
+  color: black;
+  padding: 0 3px;
+} */
+
+.mdc-form-field>label {
+  color: black;
+  padding: 0 4px;
+}
+
+.correct {
+  color: green;
+  background-color: lightgreen;
+  font-weight: bold;
+}
+
 #submit-button {
   margin-top: 1rem;
   margin-bottom: 1rem;
