@@ -21,32 +21,11 @@
     <main>
     </main>
 
-    <!-- Dialog -->
-    <div class="mdc-dialog"
-         role="alertdialog"
-         aria-modal="true"
-         aria-labelledby="my-dialog-title"
-         aria-describedby="my-dialog-content">
-      <div class="mdc-dialog__container">
-        <div class="mdc-dialog__surface">
-          <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
-          <!-- <h2 class="mdc-dialog__title" id="my-dialog-title">Dialog title</h2> -->
-          <div class="mdc-dialog__content" id="my-dialog-content">
-            <p id="dialog__result-message">Dialog body text goes here.</p>
-            <p>Play again?</p>
-          </div>
-          <footer class="mdc-dialog__actions">
-            <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="go-to-start-page">
-              <span class="mdc-button__label">No</span>
-            </button>
-            <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="new-quiz">
-              <span class="mdc-button__label">Yes</span>
-            </button>
-          </footer>
-        </div>
-      </div>
-      <div class="mdc-dialog__scrim"></div>
+    <!-- Result message -->
+    <div id="result-message__container" class="hidden">
+      <p id="result-message">Text goes here.</p>
+      <button type="button" class="mdc-button mdc-button--raised">No</button>
+      <button type="button" class="mdc-button mdc-button--raised">Yes</button>
     </div>
-
   </body>
 </html>

@@ -155,17 +155,7 @@ function reactivateFormElements() {
 // -------------------------- VIEW ------------------------------------------
 
 //Finding elements
-let dialogContent = document.querySelector('.mdc-dialog__content');
 let main = document.querySelector('main');
-
-//Creating dialog object
-const dialog =  new mdc.dialog.MDCDialog(document.querySelector('.mdc-dialog'));
-
-//Making the dialog a 'real' modal dialog
-dialog.scrimClickAction = '';
-
-//Making the text content in the dialog black
-dialogContent.style.color = 'black';
 
 // --------------------- Function clearing main --------------------------------
 function clearView() {
@@ -318,7 +308,6 @@ function renderQuizPage() {
           let label = document.createElement('label');
           label.setAttribute('for', inputId);
           label.innerHTML = answer;
-          //label.style.color = 'black';
           formField.appendChild(label);
 
           let lineBreak = document.createElement('br');
@@ -404,31 +393,25 @@ function onClickStartQuiz() {
 }
 
 // ------------------ Listening to buttons in the dialog --------------------
-let dialogElement = document.querySelector('[class="mdc-dialog"]');
-
-dialogElement.addEventListener('MDCDialog:closing', function(event) {
-  //Finding elements
-  let html = document.querySelector('html');
 
   //Scrolling to the top
-  html.scrollTop = 0;
+  //html.scrollTop = 0;
 
   //Making form elements interactable again
-  reactivateFormElements();
+  //reactivateFormElements();
 
   //If yes was chosen
-  if(event.detail.action === 'new-quiz') {
-    quizNr++;
-    clearView();
-    renderQuizPage();
-  }
+  // if(event.detail.action === 'new-quiz') {
+  //   quizNr++;
+  //   clearView();
+  //   renderQuizPage();
+  // }
   //If no was chosen
-  else {
-    quizNr = 1;
-    clearView();
-    renderIndexPage();
-  }
-});
+  // else {
+  //   quizNr = 1;
+  //   clearView();
+  //   renderIndexPage();
+  // }
 
 // ---- Function checking answers and showing dialog -------
 function onSubmitCheckAnswers(event) {
@@ -439,15 +422,20 @@ function onSubmitCheckAnswers(event) {
   //Counting correct answers
   let countCorrectAnswers = checkAnswers();
 
+  //Highlight the correct answers
   showCorrectAnswers();
-
-  //Updating text in dialog
-  //let messageInDialog = document.querySelector('#dialog__result-message');
-  //messageInDialog.textContent = 'You answered ' + countCorrectAnswers + ' of 10 questions correctly.';
-
-  //Showing dialog
-  //dialog.open();
 
   //Making it impossible to interact with any element in the form
   //disableFormElements();
+
+  //Disable submit button
+  let submitButton = document.querySelector('#submit-button');
+  submitButton.disabled = true;
+
+  // Showing result message
+  let resultMessage = document.querySelector('#result-message');
+  let resultMessageContainer = document.querySelector('#result-message__container');
+  resultMessage.textContent = 'You answered ' + countCorrectAnswers + ' of 10 questions correctly. Play again?';
+  resultMessageContainer.classList.remove('hidden');
+  resultMessageContainer.scrollIntoView(false);
 }
