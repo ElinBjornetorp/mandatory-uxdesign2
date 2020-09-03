@@ -166,9 +166,10 @@ function clearView() {
 
 // ------------------- Function rendering start page ------------------------
 function renderIndexPage() {
-  //Styling content in main
-  main.style.justifyContent = 'center';
-  main.style.alignItems = 'center';
+
+  //Changing class name on body element
+  document.body.classList.remove('quiz-page');
+  document.body.classList.add('start-page')
 
   //Creating button
   let button = document.createElement('button');
@@ -188,9 +189,10 @@ function renderIndexPage() {
 
 // ------------------- Function rendering quiz page ----------------------
 function renderQuizPage() {
-  //Styling content in main
-  main.style.justifyContent = 'flex-start';
-  main.style.alignItems = 'flex-start';
+
+  //Changing class name on body element
+  document.body.classList.remove('start-page');
+  document.body.classList.add('quiz-page');
 
   //Creating header
   let h2 = document.createElement('h2');

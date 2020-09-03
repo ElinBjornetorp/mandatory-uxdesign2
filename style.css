@@ -15,15 +15,26 @@ body {
 }
 
 main {
+  padding-top: 20%; /* This is to avoid that the header ovarlaps the h2 on mobile */
   min-height: 100vh;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
 
+.start-page main {
+  padding-top: 10%;
+  justify-content: center;
+  align-items: center;
+}
+
+.quiz-page main {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
 h2 {
-  margin-top: 10%;
-  padding-top: 1rem;
+  margin-bottom: 0;
 }
 
 .hidden {
@@ -94,4 +105,12 @@ form {
   float: right;
   background-color: var(--quizapp-rusty-orange);
   margin: 0.1rem;
+}
+
+/* Responsive design for tablets and larger devices */
+
+@media screen and (min-width: 768px) {
+  main {
+    padding-top: 10%;
+  }
 }
