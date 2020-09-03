@@ -132,6 +132,7 @@ function disableFormElements() {
   let inputArray = document.querySelectorAll('form input'); // *All input elements in the form
   for(let input of inputArray) {
     input.setAttribute('disabled', true);
+    //input.disabled = true;
   }
 
   //Making the submit button disabled
@@ -338,6 +339,39 @@ function renderQuizPage() {
   request.send();
 }
 
+// ---------------------------------------------------------------------
+function renderResultMessage(countCorrectAnswers) {
+  //Creating container
+  let div = document.createElement('div');
+  div.id = 'result-message__container';
+  main.appendChild(div);
+
+  //Creating p tag with result message
+  let p = document.createElement('p');
+  p.id = 'result-message';
+  p.textContent = `You answered ${countCorrectAnswers} of 10 questions correctly. Play again?`;
+  div.appendChild(p);
+
+  //Creating buttons
+  let quitGameButton = document.createElement('button');
+  let playAgainButton = document.createElement('button');
+  quitGameButton.id = 'quit-game-button';
+  quitGameButton.classList.add('mdc-button', 'mdc-button--raised');
+  quitGameButton.textContent = 'No';
+  playAgainButton.id = 'play-again-button';
+  playAgainButton.classList.add('mdc-button', 'mdc-button--raised');
+  playAgainButton.textContent = 'Yes';
+  div.appendChild(quitGameButton);
+  div.appendChild(playAgainButton);
+
+  //Listening to buttons
+  quitGameButton.addEventListener('click', quitGame);
+  playAgainButton.addEventListener('click', playAgain);
+
+  //Scrolling down
+  div.scrollIntoView(false);
+}
+
 // ------------------ Function showing error message ------------------------
 function showErrorMessage() {
 
@@ -361,6 +395,7 @@ function removeErrorMessage() {
   form.removeChild(errorMessage);
 }
 
+// ------------ Function indicating/highlighting the correct answers -----------------------------
 function showCorrectAnswers() {
   for(let i = 0; i < 10; i++) {
     //Creating variables
@@ -392,27 +427,6 @@ function onClickStartQuiz() {
   renderQuizPage();
 }
 
-// ------------------ Listening to buttons in the dialog --------------------
-
-  //Scrolling to the top
-  //html.scrollTop = 0;
-
-  //Making form elements interactable again
-  //reactivateFormElements();
-
-  //If yes was chosen
-  // if(event.detail.action === 'new-quiz') {
-  //   quizNr++;
-  //   clearView();
-  //   renderQuizPage();
-  // }
-  //If no was chosen
-  // else {
-  //   quizNr = 1;
-  //   clearView();
-  //   renderIndexPage();
-  // }
-
 // ---- Function checking answers and showing dialog -------
 function onSubmitCheckAnswers(event) {
 
@@ -426,16 +440,26 @@ function onSubmitCheckAnswers(event) {
   showCorrectAnswers();
 
   //Making it impossible to interact with any element in the form
-  //disableFormElements();
-
-  //Disable submit button
-  let submitButton = document.querySelector('#submit-button');
-  submitButton.disabled = true;
+  disableFormElements();
 
   // Showing result message
-  let resultMessage = document.querySelector('#result-message');
-  let resultMessageContainer = document.querySelector('#result-message__container');
-  resultMessage.textContent = 'You answered ' + countCorrectAnswers + ' of 10 questions correctly. Play again?';
-  resultMessageContainer.classList.remove('hidden');
-  resultMessageContainer.scrollIntoView(false);
+  renderResultMessage(countCorrectAnswers);
+}
+
+function playAgain() {
+  let html = document.querySelector('html');
+  html.scrollTop = 0; //Scroll to top
+  reactivateFormElements();
+  quizNr++;
+  clearView();
+  renderQuizPage();
+}
+
+function quitGame() {
+  let html = document.querySelector('html');
+  html.scrollTop = 0; //Scroll to top
+  reactivateFormElements();
+  quizNr = 1;
+  clearView();
+  renderIndexPage();
 }
