@@ -131,13 +131,12 @@ function disableFormElements() {
   //Making all input elements disabled
   let inputArray = document.querySelectorAll('form input'); // *All input elements in the form
   for(let input of inputArray) {
-    input.setAttribute('disabled', true);
-    //input.disabled = true;
+    input.disabled = true;
   }
 
   //Making the submit button disabled
   let submitButton = document.querySelector('#submit-button');
-  submitButton.setAttribute('disabled', true);
+  submitButton.disabled = true;
 }
 
 // ------------ Function reactivating all input elements + submit button ------
@@ -145,12 +144,12 @@ function reactivateFormElements() {
   //Removing 'disabled' attribute from all input elements
   let inputArray = document.querySelectorAll('form input');
   for(let input of inputArray) {
-    input.removeAttribute('disabled');
+    input.disabled = false;
   }
 
   //Removing 'disabled' attribute from the submit button
   let submitButton = document.querySelector('#submit-button');
-  submitButton.removeAttribute('disabled', 'false');
+  submitButton.disabled = false;
 }
 
 // -------------------------- VIEW ------------------------------------------
