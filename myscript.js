@@ -39,6 +39,7 @@ function parseJSON(jsonString) {
   }
 }
 
+// ------------- Function decoding html (to avoid things like &qout in the output) ------------------
 function decodeHTML(html) {
   var txt = document.createElement('textarea');
 	txt.innerHTML = html;
@@ -404,11 +405,24 @@ function showCorrectAnswers() {
     let querySelector = '#question' + questionObject.id + ' label';
     let arrayOfLabels = document.querySelectorAll(querySelector);
     let correctAnswer = decodeHTML(questionObject.correctAnswer); // Decode to avoid things like &quote in string
+    let selectedAnswer = questionObject.selectedAnswer;
     for(let label of arrayOfLabels) {
       console.log(label.textContent);
       if(label.textContent === correctAnswer) {
-        label.classList.add('correct');
-        break;
+        label.classList.add('correct'); //Highlight the correct answer in green
+        //If the user answered correctly, add a checkmark
+        if(correctAnswer === selectedAnswer) {
+          let icon = document.createElement('span');
+          icon.classList.add('material-icons');
+          icon.textContent = 'check';
+          label.appendChild(icon);
+        }
+      }
+      else if(label.textContent === selectedAnswer) { //If the user did not choose the correct answer
+        let icon = document.createElement('span');
+        icon.classList.add('material-icons');
+        icon.textContent = 'clear';
+        label.appendChild(icon);
       }
     }
   }
@@ -443,7 +457,7 @@ function onSubmitCheckAnswers(event) {
   //Making it impossible to interact with any element in the form
   disableFormElements();
 
-  // Showing result message
+  //Showing result message
   renderResultMessage(countCorrectAnswers);
 }
 
