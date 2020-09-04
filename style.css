@@ -76,9 +76,14 @@ form {
   cursor: pointer;
 }
 
+/* Label with the class correct */
 .correct {
   color: green;
   background-color: lightgreen;
+  font-weight: bold;
+}
+
+.mdc-form-field i {
   font-weight: bold;
 }
 

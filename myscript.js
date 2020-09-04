@@ -405,24 +405,30 @@ function showCorrectAnswers() {
     let querySelector = '#question' + questionObject.id + ' label';
     let arrayOfLabels = document.querySelectorAll(querySelector);
     let correctAnswer = decodeHTML(questionObject.correctAnswer); // Decode to avoid things like &quote in string
-    let selectedAnswer = questionObject.selectedAnswer;
+    let selectedAnswer = decodeHTML(questionObject.selectedAnswer); // See expl. above
     for(let label of arrayOfLabels) {
-      console.log(label.textContent);
+      //console.log(label.textContent);
       if(label.textContent === correctAnswer) {
         label.classList.add('correct'); //Highlight the correct answer in green
         //If the user answered correctly, add a checkmark
-        if(correctAnswer === selectedAnswer) {
-          let icon = document.createElement('span');
+        if(questionObject.answerIsCorrect()) {
+          let icon = document.createElement('i');
           icon.classList.add('material-icons');
           icon.textContent = 'check';
-          label.appendChild(icon);
+          icon.style.color = 'green';
+          label.parentElement.appendChild(icon);
         }
       }
-      else if(label.textContent === selectedAnswer) { //If the user did not choose the correct answer
-        let icon = document.createElement('span');
+      else if(label.textContent === selectedAnswer) { //If the user chose an incorrect answer
+        let icon = document.createElement('i');
         icon.classList.add('material-icons');
         icon.textContent = 'clear';
-        label.appendChild(icon);
+        icon.style.color = 'red';
+        label.parentElement.appendChild(icon);
+      }
+      else {
+        console.log('label.textContent: ', label.textContent);
+        console.log('selectedAnswer: ', selectedAnswer);
       }
     }
   }
